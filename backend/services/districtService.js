@@ -3,7 +3,9 @@ const { MOCK_DISTRICTS } = require('./mockData');
 
 // Census Bureau ACS 5-year API — free, no key required
 const CENSUS_BASE = 'https://api.census.gov/data/2022/acs/acs5';
-const CENSUS_VARS = 'NAME,B14001_001E,B19013_001E,B01003_001E';
+// B15003_001E = pop 25+, B15003_017E = HS diploma, B15003_018E = GED,
+// B15003_019..025E = some college through doctorate (all "graduated")
+const CENSUS_VARS = 'NAME,B14001_001E,B19013_001E,B01003_001E,B15003_001E,B15003_017E,B15003_018E,B15003_019E,B15003_020E,B15003_021E,B15003_022E,B15003_023E,B15003_024E,B15003_025E';
 
 // State abbreviation → FIPS code
 const STATE_FIPS = {
@@ -37,6 +39,13 @@ function parseCensusRows(rows) {
     const medianIncome = parseInt(row[idx('B19013_001E')], 10) || null;
     const expenditurePerPupil = medianIncome ? Math.round(medianIncome * 0.28 + 4000) : null;
 
+    // Graduation rate: % of adults 25+ with HS diploma or higher
+    const pop25 = parseInt(row[idx('B15003_001E')], 10) || 0;
+    const graduated = ['B15003_017E','B15003_018E','B15003_019E','B15003_020E',
+                       'B15003_021E','B15003_022E','B15003_023E','B15003_024E','B15003_025E']
+      .reduce((sum, v) => sum + (parseInt(row[idx(v)], 10) || 0), 0);
+    const graduationRate = pop25 > 0 ? Math.round((graduated / pop25) * 1000) / 10 : null;
+
     return {
       id,
       ncessId: id,
@@ -51,7 +60,7 @@ function parseCensusRows(rows) {
       revenueTotal: null,
       expenditureTotal: null,
       expenditurePerPupil,
-      graduationRate: null,
+      graduationRate,
       testScoreMath: null,
       testScoreReading: null,
     };
