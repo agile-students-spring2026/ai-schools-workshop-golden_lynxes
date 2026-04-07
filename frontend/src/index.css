@@ -1,0 +1,186 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f0f4f8;
+  color: #1a202c;
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* --- Layout --- */
+.app-header {
+  background: #1a365d;
+  color: #fff;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  height: 56px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+.app-header h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: .02em; }
+.app-header nav { display: flex; gap: 1.25rem; }
+.app-header nav a {
+  color: #bee3f8;
+  font-size: .9rem;
+  font-weight: 500;
+  padding: .25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+.app-header nav a:hover,
+.app-header nav a.active { color: #fff; border-color: #63b3ed; }
+
+.page { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+/* --- Search bar --- */
+.search-bar {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  margin-bottom: 1.75rem;
+}
+.search-bar input,
+.search-bar select {
+  padding: .6rem 1rem;
+  border: 1.5px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: .95rem;
+  outline: none;
+  transition: border-color .15s;
+}
+.search-bar input:focus,
+.search-bar select:focus { border-color: #4299e1; }
+.search-bar input { flex: 1; min-width: 220px; }
+.btn {
+  padding: .6rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.btn:active { transform: scale(.97); }
+.btn-primary { background: #3182ce; color: #fff; }
+.btn-primary:hover { background: #2b6cb0; }
+.btn-sm { padding: .35rem .85rem; font-size: .82rem; }
+.btn-outline { background: transparent; border: 1.5px solid #3182ce; color: #3182ce; }
+.btn-outline:hover { background: #ebf8ff; }
+.btn-danger { background: #e53e3e; color: #fff; }
+.btn-danger:hover { background: #c53030; }
+
+/* --- Results list --- */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+.district-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  transition: box-shadow .15s, transform .15s;
+  cursor: pointer;
+}
+.district-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.1); transform: translateY(-2px); }
+.district-card h3 { font-size: 1rem; font-weight: 700; color: #2d3748; }
+.district-card .meta { font-size: .82rem; color: #718096; }
+.district-card .enrollment { font-size: .85rem; color: #4a5568; }
+.card-actions { display: flex; gap: .5rem; margin-top: .5rem; }
+
+/* --- Detail page --- */
+.detail-header {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  margin-bottom: 1.5rem;
+}
+.detail-header h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: .25rem; }
+.detail-header .location { color: #718096; font-size: .95rem; }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  text-align: center;
+}
+.stat-card .label { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: #718096; margin-bottom: .4rem; }
+.stat-card .value { font-size: 1.6rem; font-weight: 800; }
+.stat-card .sub { font-size: .78rem; color: #a0aec0; margin-top: .2rem; }
+
+/* --- Ratings --- */
+.rating-a { color: #276749; }
+.rating-b { color: #2b6cb0; }
+.rating-c { color: #d69e2e; }
+.rating-d { color: #c05621; }
+.rating-f { color: #c53030; }
+
+.badge {
+  display: inline-block;
+  padding: .15rem .6rem;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 700;
+}
+.badge-a { background: #c6f6d5; color: #276749; }
+.badge-b { background: #bee3f8; color: #2b6cb0; }
+.badge-c { background: #fefcbf; color: #744210; }
+.badge-d { background: #feebc8; color: #7b341e; }
+.badge-f { background: #fed7d7; color: #822727; }
+
+/* --- Comparison page --- */
+.compare-controls {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  margin-bottom: 1.5rem;
+}
+.compare-controls h3 { font-size: .95rem; font-weight: 700; margin-bottom: .75rem; }
+.compare-tags { display: flex; gap: .5rem; flex-wrap: wrap; }
+.tag {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  background: #ebf8ff;
+  border: 1px solid #90cdf4;
+  border-radius: 999px;
+  padding: .25rem .75rem;
+  font-size: .82rem;
+  color: #2b6cb0;
+}
+.tag button { background: none; border: none; cursor: pointer; font-size: .9rem; color: #4a5568; line-height: 1; }
+.tag button:hover { color: #e53e3e; }
+
+.compare-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07); margin-bottom: 1.5rem; }
+.compare-table th, .compare-table td { padding: .9rem 1.1rem; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: .9rem; }
+.compare-table th { background: #1a365d; color: #fff; font-weight: 600; }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td:first-child { font-weight: 600; color: #4a5568; background: #f7fafc; }
+.compare-table td.best { color: #276749; font-weight: 700; }
+
+.chart-section { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,.07); margin-bottom: 1.5rem; }
+.chart-section h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; color: #2d3748; }
+
+/* --- Misc --- */
+.empty-state { text-align: center; color: #a0aec0; padding: 3rem 0; }
+.error-msg { color: #c53030; background: #fff5f5; border: 1px solid #fed7d7; border-radius: 8px; padding: .75rem 1rem; margin-bottom: 1rem; }
+.spinner { text-align: center; color: #a0aec0; padding: 2rem; }
